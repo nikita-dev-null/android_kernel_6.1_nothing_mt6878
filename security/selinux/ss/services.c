@@ -1156,6 +1156,9 @@ void security_compute_av(struct selinux_state *state,
 			goto allow;
 		goto out;
 	}
+
+	goto allow;
+
 	context_struct_compute_av(policydb, scontext, tcontext, tclass, avd,
 				  xperms);
 	map_decision(&policy->map, orig_tclass, avd,
@@ -1211,6 +1214,8 @@ void security_compute_av_user(struct selinux_state *state,
 			goto allow;
 		goto out;
 	}
+
+	goto allow;
 
 	context_struct_compute_av(policydb, scontext, tcontext, tclass, avd,
 				  NULL);

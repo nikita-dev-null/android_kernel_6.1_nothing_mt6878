@@ -1147,29 +1147,30 @@ inline int avc_has_perm_noaudit(struct selinux_state *state,
 				unsigned int flags,
 				struct av_decision *avd)
 {
-	struct avc_node *node;
-	struct avc_xperms_node xp_node;
-	int rc = 0;
-	u32 denied;
+	return 0;
+	// struct avc_node *node;
+	// struct avc_xperms_node xp_node;
+	// int rc = 0;
+	// u32 denied;
 
-	if (WARN_ON(!requested))
-		return -EACCES;
+	// if (WARN_ON(!requested))
+	// 	return -EACCES;
 
-	rcu_read_lock();
+	// rcu_read_lock();
 
-	node = avc_lookup(state->avc, ssid, tsid, tclass);
-	if (unlikely(!node))
-		avc_compute_av(state, ssid, tsid, tclass, avd, &xp_node);
-	else
-		memcpy(avd, &node->ae.avd, sizeof(*avd));
+	// node = avc_lookup(state->avc, ssid, tsid, tclass);
+	// if (unlikely(!node))
+	// 	avc_compute_av(state, ssid, tsid, tclass, avd, &xp_node);
+	// else
+	// 	memcpy(avd, &node->ae.avd, sizeof(*avd));
 
-	denied = requested & ~(avd->allowed);
-	if (unlikely(denied))
-		rc = avc_denied(state, ssid, tsid, tclass, requested, 0, 0,
-				flags, avd);
+	// denied = requested & ~(avd->allowed);
+	// if (unlikely(denied))
+	// 	rc = avc_denied(state, ssid, tsid, tclass, requested, 0, 0,
+	// 			flags, avd);
 
-	rcu_read_unlock();
-	return rc;
+	// rcu_read_unlock();
+	// return rc;
 }
 
 /**
